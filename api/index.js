@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const User = require("./models/User");
 
@@ -32,6 +32,7 @@ app.post("/register", async (req, res) => {
 			email,
 			password: bcrypt.hashSync(password, bcryptSalt),
 		});
+		res.json(userDoc);
 	} catch (e) {
 		res.status(422).json(e);
 	}
